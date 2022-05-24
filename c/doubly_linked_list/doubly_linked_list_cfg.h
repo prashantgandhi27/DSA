@@ -2,17 +2,17 @@
 *  \author     Prashant Gandhi
 *  \date       05/22/2022
 ********************************************************************************
-*  \file       linked_list_cfg.h
+*  \file       doubly_linked_list_cfg.h
 *
-*  \brief      Defines for Singly Linked List.
+*  \brief      Defines for Doubly Linked List.
 *
 *  \details    None
 *
 *  \note       None
 *
 *******************************************************************************/
-#ifndef __LINKED_LIST_CFG_H__
-#define __LINKED_LIST_CFG_H__
+#ifndef __DOUBLY_LINKED_LIST_CFG_H__
+#define __DOUBLY_LINKED_LIST_CFG_H__
 
 #include <stdint.h>
 
@@ -21,15 +21,14 @@ extern "C"
 {
 #endif
 
-/* Type of the singly linked list */
-typedef uint32_t LINKED_LIST_TYPE;
+/* Type of the doubly linked list */
+typedef float DOUBLY_LINKED_LIST_TYPE;
 
-/* Define NULL pointer */
-#define LINKED_LIST_NULL          (void *)(0)
+/* Custom NULL pointer */
+#define DOUBLY_LINKED_LIST_NULL  ( void * )( 0 )
 
 #ifdef __cplusplus
 }
 #endif
 
-
-#endif /* __LINKED_LIST_CFG_H__ */
+#endif  /* __DOUBLY_LINKED_LIST_CFG_H__*/

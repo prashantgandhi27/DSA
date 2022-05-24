@@ -1,17 +1,12 @@
 /*!*****************************************************************************
 *  \author     Prashant Gandhi
-*  \date       02/14/2022
+*  \date       05/22/2022
 ********************************************************************************
-*  \file       ring_buffer.h
+*  \file       linked_list.h
 *
-*  \brief      This files contains ring buffer function declaration.
+*  \brief      This files contains Singly linked list function declaration.
 *
-*  \details    This version of ring buffer does not make use of buffer
-*              size to check whether ring is empty or full. Instead it reserves
-*              one space for that. Meaning, when ring buffer size is given 10,
-*              ring can hold only 9 elements in buffer at a time. 
-*
-*  \note       VERSION - 0.2.0
+*  \note       None
 *
 *******************************************************************************/
 #ifndef __LINKED_LIST_H__
