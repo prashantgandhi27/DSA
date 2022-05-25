@@ -17,7 +17,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "linked_list_cfg.h"
+#include "../milkyway_list_common_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -26,7 +26,7 @@ extern "C"
 
 typedef struct linked_list
 {
-    LINKED_LIST_TYPE data;
+    LIST_TYPE data;
     struct linked_list *nextNode;
 } LINKED_LIST;
 
@@ -50,7 +50,7 @@ void *InitializeLinkedList( void );
 *  \retval     None
 *
 ******************************************************************************/
-void InsertItem(void **ppLinkedListHead, const LINKED_LIST_TYPE data);
+void InsertItem(void **ppLinkedListHead, const LIST_TYPE data);
 
 /*!*****************************************************************************
 *  \brief      Looks for the requested item in the list.
@@ -62,7 +62,7 @@ void InsertItem(void **ppLinkedListHead, const LINKED_LIST_TYPE data);
 *              NULL.
 *
 ******************************************************************************/
-void *SearchItem(void *pLinkedListHead, const LINKED_LIST_TYPE cData);
+void *SearchItem( const void *pLinkedListHead, const LIST_TYPE cData);
 
 /*!*****************************************************************************
 *  \brief      Removes/deletes the requested node.
@@ -76,7 +76,27 @@ void *SearchItem(void *pLinkedListHead, const LINKED_LIST_TYPE cData);
 *                      failed.
 *
 ******************************************************************************/
-bool RemoveItem(void **ppLinkedListHead, const LINKED_LIST_TYPE cData);
+bool RemoveItem(void **ppLinkedListHead, const LIST_TYPE cData);
+
+/*!*****************************************************************************
+*  \brief      Returns front node's data.
+*
+*  \param[in]  pcHead - pointer to the head of the list.
+*
+*  \retval     Front nodes's data.
+*
+******************************************************************************/
+LIST_TYPE Front( const void *pcHead );
+
+/*!*****************************************************************************
+*  \brief      Returns last node's data.
+*
+*  \param[in]  pcHead - pointer to the head of the list.
+*
+*  \retval     last node's data.
+*
+******************************************************************************/
+LIST_TYPE Back( const void *pcHead );
 
 /*!*****************************************************************************
 *  \brief      Prints all nodes' data inside the list.

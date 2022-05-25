@@ -1,18 +1,18 @@
 /*!*****************************************************************************
 *  \author     Prashant Gandhi
-*  \date       05/22/2022
+*  \date       05/24/2022
 ********************************************************************************
-*  \file       linked_list_cfg.h
+*  \file       milkyway_list_common_cfg.h
 *
-*  \brief      Defines for Singly Linked List.
+*  \brief      Defines for the List.
 *
 *  \details    None
 *
 *  \note       None
 *
 *******************************************************************************/
-#ifndef __LINKED_LIST_CFG_H__
-#define __LINKED_LIST_CFG_H__
+#ifndef __MILKYWAY_LIST_COMMON_CFG_H__
+#define __MILKYWAY_LIST_COMMON_CFG_H__
 
 #include <stdint.h>
 
@@ -21,15 +21,15 @@ extern "C"
 {
 #endif
 
-/* Type of the singly linked list */
-typedef uint32_t LINKED_LIST_TYPE;
+/* Type of the list */
+typedef float LIST_TYPE;
 
 /* Define NULL pointer */
-#define LINKED_LIST_NULL          (void *)(0)
+#define LIST_NULL          (void *)(0)
 
 #ifdef __cplusplus
 }
 #endif
 
 
-#endif /* __LINKED_LIST_CFG_H__ */
+#endif /* __MILKYWAY_LIST_COMMON_CFG_H__ */
