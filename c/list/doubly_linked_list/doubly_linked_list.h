@@ -16,7 +16,7 @@
 
 #include <stdbool.h>
 
-#include "doubly_linked_list_cfg.h"
+#include "../milkyway_list_common_cfg.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -25,7 +25,7 @@ extern "C"
 
 typedef struct doubly_linked_list
 {
-    DOUBLY_LINKED_LIST_TYPE mData;
+    LIST_TYPE mData;
     struct doubly_linked_list *mNextNode;
     struct doubly_linked_list *mPreviousNode;
 } DOUBLY_LINKED_LIST;
@@ -49,7 +49,7 @@ void *InitializeDoublyLinkedList( void );
 *  \retval     None
 *
 ******************************************************************************/
-void InsertItem( void **ppHead, const DOUBLY_LINKED_LIST_TYPE cData );
+void InsertItem( void **ppHead, const LIST_TYPE cData );
 
 /*!*****************************************************************************
 *  \brief      Removes the item/node from the list.
@@ -61,7 +61,7 @@ void InsertItem( void **ppHead, const DOUBLY_LINKED_LIST_TYPE cData );
 *              false - node/data removal operation failed.
 *
 ******************************************************************************/
-bool RemoveItem( void **ppHead, const DOUBLY_LINKED_LIST_TYPE cData );
+bool RemoveItem( void **ppHead, const LIST_TYPE cData );
 
 /*!*****************************************************************************
 *  \brief      Searches requested data inside the list.
@@ -72,7 +72,7 @@ bool RemoveItem( void **ppHead, const DOUBLY_LINKED_LIST_TYPE cData );
 *  \retval     None
 *
 ******************************************************************************/
-void *SearchItem( const void *pcHead, const DOUBLY_LINKED_LIST_TYPE cData );
+void *SearchItem( const void *pcHead, const LIST_TYPE cData );
 
 /*!*****************************************************************************
 *  \brief      Returns front node's data.
@@ -82,7 +82,7 @@ void *SearchItem( const void *pcHead, const DOUBLY_LINKED_LIST_TYPE cData );
 *  \retval     Front nodes's data.
 *
 ******************************************************************************/
-DOUBLY_LINKED_LIST_TYPE Front( const void *pcHead );
+LIST_TYPE Front( const void *pcHead );
 
 /*!*****************************************************************************
 *  \brief      Returns last node's data.
@@ -92,7 +92,7 @@ DOUBLY_LINKED_LIST_TYPE Front( const void *pcHead );
 *  \retval     last node's data.
 *
 ******************************************************************************/
-DOUBLY_LINKED_LIST_TYPE Back( const void *pcHead );
+LIST_TYPE Back( const void *pcHead );
 
 /*!*****************************************************************************
 *  \brief      Returns number of nodes inside list.
@@ -143,7 +143,7 @@ void PrintListBackward( const void *pcHead );
 *  \retval     None
 *
 ******************************************************************************/
-bool DestroyList( void **ppHead );
+void DestroyList( void **ppHead );
 
 #ifdef __cplusplus
 }

@@ -10,6 +10,7 @@
 *
 *******************************************************************************/
 #include "linked_list.h"
+#include "../milkyway_list_common.h"
 
 /*!*****************************************************************************
 *  \fn         RING_BUFFER *CreateRingBuffer(uint32_t *buffer, uint32_t ringSize)
@@ -24,8 +25,8 @@
 static void *createNode( void )
 {
     LINKED_LIST *localPtr = (LINKED_LIST *)malloc(sizeof(LINKED_LIST));
-    localPtr->data        = (LINKED_LIST_TYPE)0x00;
-    localPtr->nextNode    = LINKED_LIST_NULL;
+    localPtr->data        = (LIST_TYPE)0x00;
+    localPtr->nextNode    = LIST_NULL;
 
     return localPtr;
 }
@@ -33,11 +34,11 @@ static void *createNode( void )
 /******************************************************************************/
 void *InitializeLinkedList( void )
 {
-    return LINKED_LIST_NULL;
+    return LIST_NULL;
 }
 
 /******************************************************************************/
-void InsertItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
+void InsertItem(void **pLinkedListHead, const LIST_TYPE cData)
 {
     bool status = true;
 
@@ -46,13 +47,13 @@ void InsertItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
     LINKED_LIST *localTempPtr = (LINKED_LIST *)createNode();
     localTempPtr->data = cData;
 
-    if ( LINKED_LIST_NULL == localHeadPtr )
+    if ( LIST_NULL == localHeadPtr )
     {
         *pLinkedListHead = localTempPtr;
     }
     else
     {
-        while ( LINKED_LIST_NULL != localHeadPtr->nextNode )
+        while ( LIST_NULL != localHeadPtr->nextNode )
         {
             localHeadPtr = localHeadPtr->nextNode;
         }
@@ -64,31 +65,33 @@ void InsertItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
 }
 
 /******************************************************************************/
-void *SearchItem(void *pLinkedListHead, const LINKED_LIST_TYPE cData)
+void *SearchItem(const void *pLinkedListHead, const LIST_TYPE cData)
 {
-    bool found = false;
+    void *localPtr = LIST_NULL;
 
-    while ( LINKED_LIST_NULL != pLinkedListHead )
+    while ( LIST_NULL != pLinkedListHead )
     {
         if ( ((LINKED_LIST *)pLinkedListHead)->data == cData )
         {
-            found = true;
+            localPtr = (LINKED_LIST *)pLinkedListHead;
             break;
         }
-        
-        pLinkedListHead = ((LINKED_LIST *)pLinkedListHead)->nextNode;
-    }
+        else
+        {
+            pLinkedListHead = ((LINKED_LIST *)pLinkedListHead)->nextNode;
+        }
+    }        
 
-    return pLinkedListHead;
+    return localPtr;
 }
 
 /******************************************************************************/
-bool RemoveItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
+bool RemoveItem(void **pLinkedListHead, const LIST_TYPE cData)
 {
     bool status = false;
 
-    if ( (pLinkedListHead != LINKED_LIST_NULL ) && 
-       ( (*pLinkedListHead) != LINKED_LIST_NULL ) )
+    if ( (pLinkedListHead != LIST_NULL ) && 
+       ( (*pLinkedListHead) != LIST_NULL ) )
     {
         LINKED_LIST *localTempPtr = *pLinkedListHead;
 
@@ -100,7 +103,7 @@ bool RemoveItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
         }
         else
         {
-            while ( LINKED_LIST_NULL != localTempPtr->nextNode )
+            while ( LIST_NULL != localTempPtr->nextNode )
             {
                 if ( localTempPtr->nextNode->data == cData )
                 {
@@ -120,11 +123,42 @@ bool RemoveItem(void **pLinkedListHead, const LINKED_LIST_TYPE cData)
 }
 
 /******************************************************************************/
+LIST_TYPE Front( const void *pcHead )
+{
+    LIST_TYPE retVal = (LIST_TYPE)( 0 );
+
+    if( LIST_NULL != pcHead )
+    {
+        retVal = ((LINKED_LIST *)pcHead)->data;
+    }
+
+    return retVal;
+}
+
+/******************************************************************************/
+LIST_TYPE Back( const void *pcHead )
+{
+    LIST_TYPE retVal = (LIST_TYPE)( 0 );
+
+    if( LIST_NULL != pcHead )
+    {
+        while ( LIST_NULL != ((LINKED_LIST *)pcHead)->nextNode)
+        {
+            pcHead = ((LINKED_LIST *)pcHead)->nextNode;
+        }
+        
+        retVal = ((LINKED_LIST *)pcHead)->data;
+    }
+
+    return retVal;
+}
+
+/******************************************************************************/
 uint32_t LinkedListSize(const void *pLinkedListHead)
 {
     uint32_t listSize = 0;
 
-    while ( LINKED_LIST_NULL != pLinkedListHead )
+    while ( LIST_NULL != pLinkedListHead )
     {
         listSize++;
         pLinkedListHead = ((LINKED_LIST *)pLinkedListHead)->nextNode;
@@ -149,7 +183,7 @@ bool IsLinkedListEmpty(const void *pLinkedListHead)
 /******************************************************************************/
 void PrintLinkedList(const void *pLinkedListHead)
 {
-    while ( LINKED_LIST_NULL != pLinkedListHead )
+    while ( LIST_NULL != pLinkedListHead )
     {
         printf("NODE DATA = %d \n", ((LINKED_LIST*)pLinkedListHead)->data);
         pLinkedListHead = ((LINKED_LIST*)pLinkedListHead)->nextNode;
@@ -160,10 +194,10 @@ void PrintLinkedList(const void *pLinkedListHead)
 void DestroyLinkedList(void **pLinkedListHead)
 {
     LINKED_LIST *localTempPtr  = (LINKED_LIST *)(*pLinkedListHead);
-    LINKED_LIST *LocalDeletPtr = LINKED_LIST_NULL;
-    *pLinkedListHead           = LINKED_LIST_NULL;
+    LINKED_LIST *LocalDeletPtr = LIST_NULL;
+    *pLinkedListHead           = LIST_NULL;
 
-    while ( LINKED_LIST_NULL != localTempPtr )
+    while ( LIST_NULL != localTempPtr )
     {
         LocalDeletPtr = localTempPtr;
         localTempPtr  = localTempPtr->nextNode;
@@ -174,24 +208,36 @@ void DestroyLinkedList(void **pLinkedListHead)
     return;
 }
 
-
 /******************************************************************************
  * Entry point.
  ******************************************************************************/
 int main( void )
 {
-    LINKED_LIST *TestLinkedList = LINKED_LIST_NULL;
+    MILKYWAY_LIST_COMMON *MilkywayList =
+        ( MILKYWAY_LIST_COMMON * )malloc( sizeof( MILKYWAY_LIST_COMMON ) );
+    
+    MilkywayList->mListPtr        = LIST_NULL;
+    MilkywayList->mInitializeList = InitializeLinkedList;
+    MilkywayList->mInsertItem     = InsertItem;
+    MilkywayList->mRemoveItem     = RemoveItem;
+    MilkywayList->mFront          = Front;
+    MilkywayList->mBack           = Back;
+    MilkywayList->mSearchItem     = SearchItem;
+    MilkywayList->mEmpty          = IsLinkedListEmpty;
+    MilkywayList->mSize           = LinkedListSize;
+    MilkywayList->mPrintList      = PrintLinkedList;
+    MilkywayList->mDestroy        = DestroyLinkedList;
 
-    LINKED_LIST_TYPE linkedListData = 0;
+    LIST_TYPE linkedListData = 0;
 
     for ( linkedListData = 0; linkedListData < 10; ++linkedListData )
     {
-        InsertItem( (void *)&TestLinkedList, linkedListData );
+        MilkywayList->mInsertItem( &MilkywayList->mListPtr, linkedListData );
     }
 
-    PrintLinkedList( TestLinkedList );
+    MilkywayList->mPrintList( MilkywayList->mListPtr );
 
-    if ( IsLinkedListEmpty( TestLinkedList ) == true )
+    if ( MilkywayList->mEmpty( MilkywayList->mListPtr ) == true )
     {
         printf("\n");
         printf("List is empty. \n");
@@ -205,20 +251,20 @@ int main( void )
     }
 
     printf("\n");
-    printf("Size of the list = %d \n", LinkedListSize(TestLinkedList));
+    printf( "Size of the list = %d \n", MilkywayList->mSize( MilkywayList->mListPtr ) );
     printf("\n");
 
-    if ( RemoveItem( (void *)&TestLinkedList, 0 ) == true )
+    if ( MilkywayList->mRemoveItem( &MilkywayList->mListPtr, 0 ) == true )
     {
-        PrintLinkedList(TestLinkedList);
+        MilkywayList->mPrintList( MilkywayList->mListPtr );
         printf("\n");
-        printf("Size of the list after removal = %d \n", LinkedListSize(TestLinkedList));
+        printf("Size of the list after removal = %d \n", MilkywayList->mSize( MilkywayList->mListPtr ));
         printf("\n");
     }
 
-    DestroyLinkedList( (void *)&TestLinkedList );
+    MilkywayList->mDestroy( &MilkywayList->mListPtr );
 
-    if ( IsLinkedListEmpty( TestLinkedList ) == true )
+    if ( MilkywayList->mEmpty( MilkywayList->mListPtr ) == true )
     {
         printf("\n");
         printf("After destroy, list is empty. \n");

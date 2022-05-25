@@ -1,18 +1,18 @@
 /*!*****************************************************************************
 *  \author     Prashant Gandhi
-*  \date       05/22/2022
+*  \date       05/24/2022
 ********************************************************************************
-*  \file       doubly_linked_list_cfg.h
+*  \file       milkyway_list_common_cfg.h
 *
-*  \brief      Defines for Doubly Linked List.
+*  \brief      Defines for the List.
 *
 *  \details    None
 *
 *  \note       None
 *
 *******************************************************************************/
-#ifndef __DOUBLY_LINKED_LIST_CFG_H__
-#define __DOUBLY_LINKED_LIST_CFG_H__
+#ifndef __MILKYWAY_LIST_COMMON_CFG_H__
+#define __MILKYWAY_LIST_COMMON_CFG_H__
 
 #include <stdint.h>
 
@@ -21,14 +21,15 @@ extern "C"
 {
 #endif
 
-/* Type of the doubly linked list */
-typedef float DOUBLY_LINKED_LIST_TYPE;
+/* Type of the list */
+typedef float LIST_TYPE;
 
-/* Custom NULL pointer */
-#define DOUBLY_LINKED_LIST_NULL  ( void * )( 0 )
+/* Define NULL pointer */
+#define LIST_NULL          (void *)(0)
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif  /* __DOUBLY_LINKED_LIST_CFG_H__*/
+
+#endif /* __MILKYWAY_LIST_COMMON_CFG_H__ */
