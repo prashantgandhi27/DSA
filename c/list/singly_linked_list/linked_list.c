@@ -13,13 +13,11 @@
 #include "../milkyway_list_common.h"
 
 /*!*****************************************************************************
-*  \fn         RING_BUFFER *CreateRingBuffer(uint32_t *buffer, uint32_t ringSize)
-*  \brief      Allocates and initializes a ring
+*  \brief      Creats the node for the list.
 *
-*  \param[in]  buffer     - pointer to user's buffer
-*  \param[in]  ringSize   - size of user's buffer
+*  \param[in]  None
 *
-*  \retval     pointer to a ring if successful, else NULL
+*  \retval     Pointer to the created node.
 *
 ******************************************************************************/
 static void *createNode( void )
